@@ -1,0 +1,11 @@
+it\vito\DTO\SaldoDTO.class
+it\vito\Feing\FeingFabrick.class
+it\vito\Feing\FeingFabrickConfig.class
+it\vito\DTO\OperazioneBancaziaDTO.class
+it\vito\Controller\SaldoController.class
+it\vito\Service\SaldoService.class
+it\vito\DTO\TypeDTO.class
+it\vito\Service\Impl\SaldoServiceImpl.class
+it\vito\TestFabrick.class
+it\vito\Service\Impl\ListaMovimentiServiceImpl.class
+it\vito\Utils\ErrorCode.class

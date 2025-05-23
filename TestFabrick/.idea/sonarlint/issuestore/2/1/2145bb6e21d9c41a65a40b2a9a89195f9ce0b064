@@ -1,0 +1,9 @@
+
+[	java:S112""FDefine and throw a dedicated exception instead of using a generic one.(ù±Õ¤
+`	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(Èßô´úÿÿÿÿ
+r
+java:S2259/"WA "NullPointerException" could be thrown; "operazioneBancaziaDTOList" is nullable here.(„ççêÿÿÿÿÿ
+c
+java:S1854,"MRemove this useless assignment to local variable "operazioneBancaziaDTOList".(ÊÃŸ
+Q
+java:S1854)";Remove this useless assignment to local variable "subList".(îŒî

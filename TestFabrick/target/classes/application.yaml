@@ -1,0 +1,30 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+#output to a temp_folder/file
+logging:
+  file:
+  path: "./logs"
+  name: "./logs/gestore-be.log"
+  # Logging pattern for the console
+  pattern:
+    console: "%-10(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{32} - %msg%n"
+  # Logging pattern for file
+    file: "%-10(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{32} - %msg%n"
