@@ -1,8 +1,8 @@
 package it.vito.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.vito.feing.FabrickResponseException;
-import it.vito.feing.FeingFabrick;
+import it.vito.feign.FabrickResponseException;
+import it.vito.feign.FeignFabrick;
 import it.vito.model.Error;
 import it.vito.model.Esito;
 import it.vito.model.ResponseFeing;
@@ -27,7 +27,7 @@ public class BonificoServiceImpl implements BonificoService {
 
     private static final Logger logger = LoggerFactory.getLogger(BonificoServiceImpl.class);
     @Autowired
-    FeingFabrick feingFabrick;
+    FeignFabrick feignFabrick;
 
     @Override
     public Esito bonifico(Long accountId,BonificoRequestDTO bonificoRequestDTO) {
@@ -38,7 +38,7 @@ public class BonificoServiceImpl implements BonificoService {
 
         try {
 
-            bonificoResponseEntity = feingFabrick.bonifico(accountId, bonificoRequestDTO);
+            bonificoResponseEntity = feignFabrick.bonifico(accountId, bonificoRequestDTO);
         } catch (FabrickResponseException ex) {
             ResponseFeing errore = ex.getResponse();
 
@@ -59,14 +59,14 @@ public class BonificoServiceImpl implements BonificoService {
             ObjectMapper mapper = new ObjectMapper();
             if (responseBody.getPayload() == null) {
                 esito.setEsito(false);
-                esito.setMessaggio(ErrorCode.E01.getDescrizione());
+                esito.setMessaggio(ErrorCode.E00.getDescrizione());
                 esito.setExtraParams(ErrorCode.E03.getDescrizione());
             }
             BonificoResponseDTO bonificoResponseDTO = mapper.convertValue(responseBody.getPayload(), BonificoResponseDTO.class);
 
 
             esito.setEsito(true);
-            esito.setMessaggio(ErrorCode.E00.getDescrizione());
+            esito.setMessaggio("Operazione eseguita");
             esito.setExtraParams(bonificoResponseDTO);
 
 
@@ -74,13 +74,13 @@ public class BonificoServiceImpl implements BonificoService {
 
             List<String> collect = responseBody.getErrors().stream().map(Error::getDescription).collect(Collectors.toList());
             esito.setEsito(false);
-            esito.setMessaggio(ErrorCode.E01.getDescrizione());
+            esito.setMessaggio(ErrorCode.E00.getDescrizione());
             esito.setExtraParams(String.valueOf(collect.get(0)));
 
 
         } else if (!flagStatusCodeTrue.test(statusCode)) {
             esito.setEsito(false);
-            esito.setMessaggio(ErrorCode.E01.getDescrizione());
+            esito.setMessaggio(ErrorCode.E00.getDescrizione());
             esito.setExtraParams(responseBody.getErrors().get(0).getDescription());
 
         }

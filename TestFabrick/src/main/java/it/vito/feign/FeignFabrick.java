@@ -1,17 +1,13 @@
-package it.vito.feing;
+package it.vito.feign;
 
 import it.vito.model.ResponseFeing;
 import it.vito.model.dto.BonificoRequestDTO;
-import it.vito.model.dto.BonificoResponseDTO;
-import it.vito.model.dto.OperazioneBancaziaDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@FeignClient(name = "mockFrabrick", url = "https://sandbox.platfr.io/api/gbs/banking/v4.0", configuration = FeingFabrickConfig.class)
-public interface FeingFabrick {
+@FeignClient(name = "mockFrabrick", url = "https://sandbox.platfr.io/api/gbs/banking/v4.0", configuration = FeignFabrickConfig.class)
+public interface FeignFabrick {
 
     @GetMapping("/accounts/{accountId}/balance")
     ResponseEntity<ResponseFeing> getSaldoFabrick(@PathVariable("accountId") Long accoundId);

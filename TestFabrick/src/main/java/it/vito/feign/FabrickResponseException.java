@@ -1,4 +1,4 @@
-package it.vito.feing;
+package it.vito.feign;
 
 import it.vito.model.ResponseFeing;
 import lombok.Getter;

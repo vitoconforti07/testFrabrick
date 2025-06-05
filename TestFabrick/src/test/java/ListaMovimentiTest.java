@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import it.vito.AppBancaFabrickApplication;
-import it.vito.feing.FeingFabrick;
+import it.vito.feign.FeignFabrick;
 import it.vito.model.Esito;
 import it.vito.model.ResponseFeing;
 import it.vito.model.dto.OperazioneBancaziaDTO;
@@ -10,10 +10,8 @@ import it.vito.service.impl.ListaMovimentiServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -36,7 +34,7 @@ public class ListaMovimentiTest {
     private ListaMovimentiServiceImpl listaMovimentiService;
 
     @Mock
-    private FeingFabrick feingFabrick;
+    private FeignFabrick feignFabrick;
 
     @Mock
     private OperazioneBancariaRepository operazioneBancariaRepository;
@@ -54,7 +52,7 @@ public class ListaMovimentiTest {
         ResponseFeing responseFeing = new ResponseFeing("OK",new ArrayList<>(),operazioneBancaziaDTOList);
         ResponseEntity<ResponseFeing> responseEntity = new ResponseEntity<>(responseFeing, HttpStatus.OK);
 
-        when(feingFabrick.getListaMovimentiFabrick(14537780L, "2019-04-01", "2019-04-01")).thenReturn(responseEntity);
+        when(feignFabrick.getListaMovimentiFabrick(14537780L, "2019-04-01", "2019-04-01")).thenReturn(responseEntity);
 
 
         Date fromAccountingDate = new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-01");

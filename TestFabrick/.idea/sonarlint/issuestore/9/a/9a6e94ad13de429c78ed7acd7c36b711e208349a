@@ -1,2 +1,9 @@
 
-g	java:S112*"FDefine and throw a dedicated exception instead of using a generic one.(—¡ÇÅúÿÿÿÿ8¢ÏÂï2
+l
+java:S2259a"JA "NullPointerException" could be thrown; "responseBody" is nullable here.(õÒ‰Êúÿÿÿÿ8Ø±şßï2
+f
+java:S2259@"JA "NullPointerException" could be thrown; "responseBody" is nullable here.(–¡Õ8Ø±şßï2
+l
+java:S2259V"JA "NullPointerException" could be thrown; "responseBody" is nullable here.(òí§õûÿÿÿÿ8×±şßï2
+G
+java:S1068"*Remove this unused "logger" private field.(ÖÈ¬™8‘²şßï2

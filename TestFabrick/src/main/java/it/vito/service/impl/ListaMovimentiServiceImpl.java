@@ -2,13 +2,12 @@ package it.vito.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.vito.feing.FabrickResponseException;
-import it.vito.feing.FeingFabrick;
+import it.vito.feign.FabrickResponseException;
+import it.vito.feign.FeignFabrick;
 import it.vito.model.Error;
 import it.vito.model.Esito;
 import it.vito.model.ResponseFeing;
 import it.vito.model.dto.OperazioneBancaziaDTO;
-import it.vito.model.entity.OperazioneBancaria;
 import it.vito.repository.OperazioneBancariaRepository;
 import it.vito.service.ListaMovimentiService;
 import it.vito.utils.ErrorCode;
@@ -30,7 +29,7 @@ public class ListaMovimentiServiceImpl implements ListaMovimentiService {
 
     private static final Logger logger = LoggerFactory.getLogger(ListaMovimentiServiceImpl.class);
     @Autowired
-    private FeingFabrick feingFabrick;
+    private FeignFabrick feignFabrick;
     @Autowired
     private OperazioneBancariaRepository operazioneBancariaRepository;
 
@@ -54,7 +53,7 @@ public class ListaMovimentiServiceImpl implements ListaMovimentiService {
         ResponseEntity<ResponseFeing> listaMovimentiFabrickResponse = null;
 
         try {
-            listaMovimentiFabrickResponse = feingFabrick.getListaMovimentiFabrick(accountId, fromAccountingDateString, toAccountingDateString);
+            listaMovimentiFabrickResponse = feignFabrick.getListaMovimentiFabrick(accountId, fromAccountingDateString, toAccountingDateString);
         } catch (FabrickResponseException ex) {
             ResponseFeing errore = ex.getResponse();
             listaMovimentiFabrickResponse = new ResponseEntity<>(errore, HttpStatus.valueOf(ex.getStatus()));
@@ -95,13 +94,13 @@ public class ListaMovimentiServiceImpl implements ListaMovimentiService {
         } else if (!flagStatusCodeTrue.test(statusCode) && flagResponseBody.test(responseBody, "KO") && responseBody.getErrors() != null) {
             List<String> collect = responseBody.getErrors().stream().map(Error::getDescription).collect(Collectors.toList());
             esito.setEsito(false);
-            esito.setMessaggio(ErrorCode.E01.getDescrizione());
+            esito.setMessaggio(ErrorCode.E00.getDescrizione());
             esito.setExtraParams(String.valueOf(collect.get(0)));
 
 
         } else if (!flagStatusCodeTrue.test(statusCode)) {
             esito.setEsito(false);
-            esito.setMessaggio(ErrorCode.E01.getDescrizione());
+            esito.setMessaggio(ErrorCode.E00.getDescrizione());
             esito.setExtraParams(responseBody.getErrors().get(0).getDescription());
 
         } return esito;

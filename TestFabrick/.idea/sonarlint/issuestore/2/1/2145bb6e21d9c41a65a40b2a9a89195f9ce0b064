@@ -1,9 +1,15 @@
 
-[	java:S112""FDefine and throw a dedicated exception instead of using a generic one.(ù±Õ¤
-`	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(Èßô´úÿÿÿÿ
-r
-java:S2259/"WA "NullPointerException" could be thrown; "operazioneBancaziaDTOList" is nullable here.(„ççêÿÿÿÿÿ
-c
-java:S1854,"MRemove this useless assignment to local variable "operazioneBancaziaDTOList".(ÊÃŸ
-Q
-java:S1854)";Remove this useless assignment to local variable "subList".(îŒî
+b	java:S112-"FDefine and throw a dedicated exception instead of using a generic one.(ù±Õ¤8òù‘âï2
+l
+java:S2259H"JA "NullPointerException" could be thrown; "responseBody" is nullable here.(ÀÚ×›ûÿÿÿÿ8Î’âï2
+l
+java:S2259i"JA "NullPointerException" could be thrown; "responseBody" is nullable here.(õÒ‰Êúÿÿÿÿ8Î’âï2
+l
+java:S2259_"JA "NullPointerException" could be thrown; "responseBody" is nullable here.(òí§õûÿÿÿÿ8Î’âï2
+X
+java:S18544";Remove this useless assignment to local variable "subList".(îŒî8üù‘âï2
+j
+java:S1854@"MRemove this useless assignment to local variable "operazioneBancaziaDTOList".(ÊÃŸ8üù‘âï2
+X	java:S125K"<This block of commented-out lines of code should be removed.(ùúµˆ8“ú‘âï2
+f
+java:S1128"DRemove this unused import 'it.vito.model.entity.OperazioneBancaria'.(Ä²ãŠşÿÿÿÿ8è’âï2

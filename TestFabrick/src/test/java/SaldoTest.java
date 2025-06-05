@@ -1,5 +1,5 @@
 import it.vito.AppBancaFabrickApplication;
-import it.vito.feing.FeingFabrick;
+import it.vito.feign.FeignFabrick;
 import it.vito.model.Error;
 import it.vito.model.Esito;
 import it.vito.model.ResponseFeing;
@@ -7,20 +7,16 @@ import it.vito.model.dto.SaldoDTO;
 import it.vito.model.entity.ContoCorrente;
 import it.vito.repository.ContoCorrenteRepository;
 import it.vito.service.impl.SaldoServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +34,7 @@ public class SaldoTest {
     private SaldoServiceImpl saldoService;
 
     @Mock
-    private FeingFabrick feingFabrick;
+    private FeignFabrick feignFabrick;
     @Mock
     private ContoCorrenteRepository contoCorrenteRepository;
 
@@ -59,7 +55,7 @@ public class SaldoTest {
         responseFeing.setErrors(null);
         responseFeing.setPayload(saldoDTO);
         ResponseEntity<ResponseFeing> responseFeingResponseEntity = new ResponseEntity<>(responseFeing, HttpStatus.OK);
-        when(feingFabrick.getSaldoFabrick(accountId)).thenReturn(responseFeingResponseEntity);
+        when(feignFabrick.getSaldoFabrick(accountId)).thenReturn(responseFeingResponseEntity);
 
         ContoCorrente contoCorrente = new ContoCorrente(1, 1, 1.00, new Date(2025-04-23), null);
         when(contoCorrenteRepository.findByidAccount(Math.toIntExact(accountId))).thenReturn(Optional.of(contoCorrente));
@@ -83,7 +79,7 @@ public class SaldoTest {
         ResponseEntity<ResponseFeing> responseFeingResponseEntity = new ResponseEntity<>(responseFeing, HttpStatus.FORBIDDEN);
 
 //        ResponseEntity responseEntitySaldo = new ResponseEntity(responseFeingResponseEntity, HttpStatus.FORBIDDEN);
-        when(feingFabrick.getSaldoFabrick(accountId)).thenReturn(responseFeingResponseEntity);
+        when(feignFabrick.getSaldoFabrick(accountId)).thenReturn(responseFeingResponseEntity);
 
 
         Esito esito = saldoService.letturaSaldo(accountId);

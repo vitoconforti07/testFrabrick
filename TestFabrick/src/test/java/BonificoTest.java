@@ -1,16 +1,11 @@
 import com.google.gson.Gson;
 import it.vito.AppBancaFabrickApplication;
-import it.vito.feing.FeingFabrick;
+import it.vito.feign.FeignFabrick;
 import it.vito.model.Error;
 import it.vito.model.Esito;
 import it.vito.model.ResponseFeing;
 import it.vito.model.dto.BonificoRequestDTO;
-import it.vito.model.dto.BonificoResponseDTO;
-import it.vito.model.dto.SaldoDTO;
-import it.vito.model.entity.ContoCorrente;
-import it.vito.repository.ContoCorrenteRepository;
 import it.vito.service.impl.BonificoServiceImpl;
-import it.vito.service.impl.SaldoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.InjectMocks;
@@ -21,9 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -38,7 +31,7 @@ public class BonificoTest {
     private BonificoServiceImpl bonificoService;
 
     @Mock
-    private FeingFabrick feingFabrick;
+    private FeignFabrick feignFabrick;
 
 
 
@@ -57,7 +50,7 @@ public class BonificoTest {
         responseFeing.setErrors(List.of(error));
         responseFeing.setPayload(null);
         ResponseEntity<ResponseFeing> responseFeingResponseEntity = new ResponseEntity<>(responseFeing, HttpStatus.FORBIDDEN);
-        when(feingFabrick.bonifico(accountId, bonificoRequestDTO)).thenReturn(responseFeingResponseEntity);
+        when(feignFabrick.bonifico(accountId, bonificoRequestDTO)).thenReturn(responseFeingResponseEntity);
 
 
         Esito esito = bonificoService.bonifico(accountId, bonificoRequestDTO);

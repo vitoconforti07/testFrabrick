@@ -35,3 +35,27 @@ V
 -src/main/java/it/vito/model/dto/SaldoDTO.java,a\c\ac7cdfdb958b9ff7a9908add9458add333b12b02
 e
 5src/main/java/it/vito/controller/SaldoController.java,5\5\5547304140a5a7241ef62cc892a3a4044bb789c9
+`
+0src/main/java/it/vito/model/entity/TypeEnum.java,e\6\e6bc3757ce55192a3fe49ee78b07ed78fa21ca0b
+h
+8src/main/java/it/vito/service/ListaMovimentiService.java,a\4\a4b0ca61751816c194195c09349c34cff7235df8
+m
+=src/main/java/it/vito/repository/ContoCorrenteRepository.java,9\2\92038e0d7a7960e575b6fdbd99ef1e70d9e0a8dd
+^
+.src/main/java/it/vito/model/ResponseFeing.java,6\a\6a6d7dad824e7937f72a156b3076c280732549f0
+j
+:src/main/java/it/vito/model/entity/OperazioneBancaria.java,1\2\12d2756341eb60fee83fa95b4fda971fb08e738a
+r
+Bsrc/main/java/it/vito/repository/OperazioneBancariaRepository.java,4\1\4145dacab5b2bc76d20887abb6aee7be2d4069e8
+j
+:src/main/java/it/vito/model/dto/OperazioneBancaziaDTO.java,a\0\a0bdf0d20b3e8d9da544f20532e19fa0233bf6ec
+b
+2src/main/java/it/vito/service/BonificoService.java,e\1\e1921d58ed27225b3faf2a42547b670b35e5a8b8
+g
+7src/main/java/it/vito/model/dto/BonificoRequestDTO.java,e\9\e9da3b38a9552bf8e63180cacb82d540970e0f43
+V
+&src/main/java/it/vito/model/Error.java,1\a\1aac0bb7c599c1436ba727e7e3a62bd177d55a6c
+K
+src/test/java/UtilTest.java,5\e\5ed50c6a2580341678e07bc1c160751b0fa647a2
+O
+src/test/java/BonificoTest.java,9\3\9365f91aff0d193132d56e7423f0c20dcb4f5a14

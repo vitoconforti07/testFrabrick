@@ -1,8 +1,8 @@
 package it.vito.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.vito.feing.FabrickResponseException;
-import it.vito.feing.FeingFabrick;
+import it.vito.feign.FabrickResponseException;
+import it.vito.feign.FeignFabrick;
 import it.vito.model.Error;
 import it.vito.model.Esito;
 import it.vito.model.ResponseFeing;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class SaldoServiceImpl implements SaldoService {
     private static final Logger logger = LoggerFactory.getLogger(SaldoServiceImpl.class);
     @Autowired
-    private FeingFabrick feingFabrick;
+    private FeignFabrick feignFabrick;
 
     @Autowired
     private ContoCorrenteRepository contoCorrenteRepository;
@@ -43,7 +43,7 @@ public class SaldoServiceImpl implements SaldoService {
 
         try {
 
-            saldoFabrickResponse = feingFabrick.getSaldoFabrick(idAccount);
+            saldoFabrickResponse = feignFabrick.getSaldoFabrick(idAccount);
         } catch (FabrickResponseException ex) {
             ResponseFeing errore = ex.getResponse();
 
@@ -63,17 +63,17 @@ public class SaldoServiceImpl implements SaldoService {
             ObjectMapper mapper = new ObjectMapper();
             if (responseBody.getPayload() == null) {
                 esito.setEsito(false);
-                esito.setMessaggio(ErrorCode.E01.getDescrizione());
+                esito.setMessaggio(ErrorCode.E00.getDescrizione());
                 esito.setExtraParams(ErrorCode.E03.getDescrizione());
             }
             SaldoDTO payloadSaldoDTO = mapper.convertValue(responseBody.getPayload(), SaldoDTO.class);
 
 
             esito.setEsito(true);
-            esito.setMessaggio(ErrorCode.E00.getDescrizione());
+            esito.setMessaggio("Operazione eseguita");
             esito.setExtraParams(payloadSaldoDTO);
             Optional<ContoCorrente> byidAccount = contoCorrenteRepository.findByidAccount(Math.toIntExact(idAccount));
-            if(byidAccount.isPresent()){
+            if (byidAccount.isPresent()) {
                 ContoCorrente contoCorrente = byidAccount.get();
                 String balance = payloadSaldoDTO.getBalance();
                 contoCorrente.setSaldo(Double.valueOf(balance));
@@ -87,13 +87,13 @@ public class SaldoServiceImpl implements SaldoService {
 
             List<String> collect = responseBody.getErrors().stream().map(Error::getDescription).collect(Collectors.toList());
             esito.setEsito(false);
-            esito.setMessaggio(ErrorCode.E01.getDescrizione());
+            esito.setMessaggio(ErrorCode.E00.getDescrizione());
             esito.setExtraParams(String.valueOf(collect.get(0)));
 
 
         } else if (!flagStatusCodeTrue.test(statusCode)) {
             esito.setEsito(false);
-            esito.setMessaggio(ErrorCode.E01.getDescrizione());
+            esito.setMessaggio(ErrorCode.E00.getDescrizione());
             esito.setExtraParams(responseBody.getErrors().get(0).getDescription());
 
         }
